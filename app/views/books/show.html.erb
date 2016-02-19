@@ -8,4 +8,38 @@
 	<%= @book.author  %>
 </p>
 
+
+<h2> Reviews </h2>
+<% @book.reviews.each do |r| %>
+
+<p>
+	<strong> Nota</strong>
+	<%= r.rate %>
+</p>
+
+<p>
+	<strong> comentario</strong>
+	<%= r.comment %>
+</p>
+
+<%end%>
+
+<h2> Avalie esse livro:</h2>
+<%= form_for([@book, @book.reviews.build]) do | f | %>
+<p>
+	<%= f.label :rate %><br>
+	<%= f.range_field(:rate, in: 1..5 ) %>
+</p>
+<p>
+	<%= f.label :comment %>
+	<%= f.text_area :comment %>
+</p>
+
+<p>
+	<%= f.submit %>
+</p>
+
+<% end %>
 <%= link_to 'Listar livros', books_path %>
+
+<%= link_to 'Editar', edit_book_path(@book) %>
